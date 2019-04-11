@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <tabs>
+      <Tab fx:id="mainTab" onSelectionChanged="#openMainTabEvent" text="Zaksięgowanie">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="290.0" prefWidth="686.0">
+               <children>
+                  <Button layoutX="802.0" layoutY="120.0" mnemonicParsing="false" onAction="#addFuturePaymentClick" text="DODAJ" />
+                  <TextField fx:id="nameTextField" layoutX="79.0" layoutY="122.0" prefHeight="34.0" prefWidth="159.0">
+                     <font>
+                        <Font name="Bell MT" size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="79.0" layoutY="34.0" text="Dodaj zaplanowaną płatność">
+                     <font>
+                        <Font name="Ebrima" size="28.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="priceTextField" layoutX="257.0" layoutY="122.0" prefHeight="34.0" prefWidth="159.0">
+                     <font>
+                        <Font name="Bell MT" size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="descTextField" layoutX="610.0" layoutY="122.0" prefHeight="34.0" prefWidth="159.0">
+                     <font>
+                        <Font name="Bell MT" size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="132.0" layoutY="93.0" text="Nazwa" />
+                  <Label layoutX="316.0" layoutY="93.0" text="Kwota" />
+                  <Label layoutX="494.0" layoutY="93.0" text="Typ" />
+                  <Label layoutX="669.0" layoutY="93.0" text="Opis" />
+                  <ChoiceBox fx:id="choiceBox" layoutX="434.0" layoutY="120.0" prefWidth="150.0" />
+                  <TableView fx:id="mainPaymentsTable" layoutX="79.0" layoutY="253.0" prefHeight="256.0" prefWidth="531.0">
+                    <columns>
+                      <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="nameCol" prefWidth="112.0" text="Name" />
+                        <TableColumn fx:id="priceCol" prefWidth="92.0" text="Price" />
+                        <TableColumn fx:id="typeCol" prefWidth="102.0" text="Type" />
+                        <TableColumn fx:id="descCol" minWidth="0.0" prefWidth="148.0" text="Description" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="79.0" layoutY="200.0" text="Zaksięguj płatność">
+                     <font>
+                        <Font name="Ebrima" size="28.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="datePicker" layoutX="656.0" layoutY="253.0" prefHeight="51.0" prefWidth="228.0" />
+                  <Button layoutX="655.0" layoutY="459.0" mnemonicParsing="false" onAction="#finishPaymentClick" prefHeight="50.0" prefWidth="228.0" text="Zaksięguj płatność" />
+                  <Label layoutX="686.0" layoutY="220.0" text="Wybierz datę zapłaty" />
+                  <TextField fx:id="finalDescTextField" layoutX="657.0" layoutY="340.0" prefHeight="95.0" prefWidth="224.0" />
+                  <Label layoutX="725.0" layoutY="313.0" text="Edytuj opis" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc994" height="5.0" layoutX="71.0" layoutY="181.0" stroke="#edb90e" strokeType="INSIDE" width="847.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    <Tab fx:id="tableTab" onSelectionChanged="#openTabEvent" text="Wykonane opłaty">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="pastPaymentsTable" layoutX="3.0" layoutY="-3.0" prefHeight="564.0" prefWidth="1000.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" prefWidth="113.0" text="ID" />
+                      <TableColumn fx:id="nameColumn" prefWidth="265.0" text="Name" />
+                        <TableColumn fx:id="priceColumn" prefWidth="175.0" text="Price" />
+                        <TableColumn fx:id="typeColumn" prefWidth="116.0" text="Type" />
+                        <TableColumn fx:id="descColumn" prefWidth="182.0" text="Description" />
+                        <TableColumn fx:id="dateColumn" prefWidth="144.0" text="Payment date" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Wykresy">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <PieChart layoutX="39.0" layoutY="11.0" prefHeight="333.0" prefWidth="500.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

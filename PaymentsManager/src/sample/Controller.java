@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import  javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 
 import java.time.ZoneId;
@@ -17,7 +18,9 @@ public class Controller {
     private FuturePaymentRepository futurePaymentRepository = new FuturePaymentRepository();
     private PastPaymentRepository pastPaymentRepository = new PastPaymentRepository();
     ObservableList<String> typeOptions = FXCollections.observableArrayList("Gaz","Prąd","Czynsz");
+    private DrawingClass drawingClass = new DrawingClass(pastPaymentRepository.getRepo());
     private int ID =0,pastID=0;
+    private ObservableList<PieChart.Data> pieChartData;
 
 
     @FXML private TableView <FuturePayment> mainPaymentsTable;
@@ -42,7 +45,29 @@ public class Controller {
     @FXML private TextField finalDescTextField;
     @FXML private Tab mainTab;
     @FXML private Tab tableTab;
+    @FXML private Tab chartsTab;
     @FXML private DatePicker datePicker;
+
+    @FXML private PieChart pieChart;
+
+    @FXML
+    void drawPFuturePayments(){
+        if(chartsTab.isSelected()){
+            Short one = 1,two=2,three=3;
+            float sum = drawingClass.ReturnTypePastPayments(one)+drawingClass.ReturnTypePastPayments(two)+drawingClass.ReturnTypePastPayments(three);
+            float percentOne = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(one)))/sum)*100;
+            float percentTwo = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(two)))/sum)*100;
+            float percentThree = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(three)))/sum)*100;
+
+            pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Gaz " + percentOne + "%",drawingClass.ReturnTypePastPayments(one)),
+                            new PieChart.Data("Prąd " + percentTwo + "%",drawingClass.ReturnTypePastPayments(two)),
+                            new PieChart.Data("Czynsz " + percentThree + "%" ,drawingClass.ReturnTypePastPayments(three)));
+            pieChart.setData(pieChartData);
+        }
+    }
+
 
     @FXML
     void openTabEvent() {

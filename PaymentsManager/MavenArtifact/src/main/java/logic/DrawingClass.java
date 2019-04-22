@@ -33,6 +33,18 @@ public class DrawingClass {
         return turboLocalList;
     }
 
+    public int ReturnTypePastPayments(short typeNum){
+        ArrayList<PastPayment> turboLocalList = new ArrayList<PastPayment>();
+        for(PastPayment pp : localList){
+            if(pp.getType() == typeNum){
+                turboLocalList.add(pp);
+            }
+        }
+        return turboLocalList.size();
+    }
+
+
+
     public void DebugPaymentsInMonth(int month){
         ArrayList<PastPayment> pastPayments = new ArrayList<PastPayment>();
         pastPayments = returnPaymentsInMonth(month);

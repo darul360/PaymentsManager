@@ -1,5 +1,7 @@
 package logic;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,14 +25,30 @@ public class DrawingClass {
         return turboLocalList;
     }
 
-    private ArrayList<PastPayment> returnPaymentBetweenDates(int month,int dayOne,int dayLast)
+    public int returnPaymentsBetweenDatesPerscent(short num,int monthOne, int monthLast,int dayOne,int dayLast)
     {
         ArrayList<PastPayment> turboLocalList = new ArrayList<PastPayment>();
         for(PastPayment pp : localList){
-            if(pp.getPaymentDate().getMonth() == month && pp.getPaymentDate().getDay() >= dayOne && pp.getPaymentDate().getDay() <= dayLast)
+            LocalDate date = pp.getPaymentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if(date.getMonthValue() >= monthOne && date.getMonthValue() <=monthLast && date.getDayOfMonth() >= dayOne && date.getDayOfMonth()  <= dayLast && pp.getPaymentType()==num)
                 turboLocalList.add(pp);
         }
-        return turboLocalList;
+        return turboLocalList.size();
+    }
+
+    public float returnPaymentsBetweenDatesAmmount(short num,int monthOne, int monthLast,int dayOne,int dayLast)
+    {
+        ArrayList<PastPayment> turboLocalList = new ArrayList<PastPayment>();
+        for(PastPayment pp : localList){
+            LocalDate date = pp.getPaymentDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if(date.getMonthValue() >= monthOne && date.getMonthValue() <=monthLast && date.getDayOfMonth() >= dayOne && date.getDayOfMonth()  <= dayLast && pp.getPaymentType()==num)
+                turboLocalList.add(pp);
+        }
+        float sum = 0;
+        for(PastPayment pp:turboLocalList){
+            sum+=pp.getPaymentPrice();
+        }
+        return sum;
     }
 
     public int ReturnTypePastPayments(short typeNum){
@@ -68,12 +86,6 @@ public class DrawingClass {
         }
     }
 
-    public void DebugPaymentsBetweenDates(int month,int dayOne,int dayLast){
-        ArrayList<PastPayment> pastPayments = new ArrayList<PastPayment>();
-        pastPayments = returnPaymentBetweenDates(month,dayOne,dayLast);
-        for (PastPayment pp : pastPayments ) {
-            System.out.println(pp.toString());
-        }
-    }
+
 
 }

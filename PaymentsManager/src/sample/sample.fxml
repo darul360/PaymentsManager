@@ -93,8 +93,8 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <PieChart fx:id="pieChart" layoutX="378.0" layoutY="44.0" prefHeight="467.0" prefWidth="571.0" />
-                  <DatePicker layoutX="54.0" layoutY="227.0" prefHeight="12.0" prefWidth="194.0" />
-                  <DatePicker layoutX="54.0" layoutY="305.0" prefHeight="12.0" prefWidth="194.0" />
+                  <DatePicker fx:id="from" disable="true" layoutX="54.0" layoutY="227.0" onAction="#Update" prefHeight="12.0" prefWidth="194.0" />
+                  <DatePicker fx:id="to" disable="true" layoutX="54.0" layoutY="305.0" onAction="#Update" prefHeight="12.0" prefWidth="194.0" />
                   <Label layoutX="54.0" layoutY="192.0" text="Od" />
                   <CheckBox fx:id="numbertCheckBox" layoutX="54.0" layoutY="128.0" mnemonicParsing="false" onAction="#drawPastPaymentsChart" text="Wykres liczbowy" />
                   <Label layoutX="54.0" layoutY="278.0" text="Do" />

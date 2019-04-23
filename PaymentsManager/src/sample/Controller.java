@@ -52,6 +52,8 @@ public class Controller {
     @FXML private DatePicker datePicker;
     @FXML private  CheckBox percentCheckBox;
     @FXML private CheckBox numbertCheckBox;
+    @FXML private  DatePicker from;
+    @FXML private DatePicker to;
 
     @FXML private PieChart pieChart;
 
@@ -59,8 +61,13 @@ public class Controller {
     void deslectCheckBoxes(){
         if(!chartsTab.isSelected()) {
             percentCheckBox.setSelected(false);
+            percentCheckBox.setDisable(false);
             numbertCheckBox.setSelected(false);
+            numbertCheckBox.setDisable(false);
+            from.setDisable(true);to.setDisable(true);
+            from.setValue(null);to.setValue(null);
             pieChartData.clear();
+
         }
 
     }
@@ -69,44 +76,107 @@ public class Controller {
     void drawPastPaymentsChart(){
         Short one = 1,two=2,three=3;
         if(numbertCheckBox.isSelected()){
+            from.setDisable(false);to.setDisable(false);
             percentCheckBox.setDisable(true);
             percentCheckBox.setSelected(false);
             DecimalFormat df = new DecimalFormat("##.##");
             df.setRoundingMode(RoundingMode.DOWN);
 
+            if((from.getEditor().getText().length() == 0 && to.getEditor().getText().length() == 0) || (from.getEditor().getText().length() != 0 && to.getEditor().getText().length() == 0)
+                    || (from.getEditor().getText().length() == 0 && to.getEditor().getText().length() != 0)){
             pieChartData = FXCollections.observableArrayList();
             pieChartData.add(new PieChart.Data("Gaz " + df.format(drawingClass.returnSumOfPayments(one)) +"zł",drawingClass.returnSumOfPayments(one)));
             pieChartData.add(new PieChart.Data("Prąd " + df.format(drawingClass.returnSumOfPayments(two)) +"zł",drawingClass.returnSumOfPayments(two)));
             pieChartData.add(new PieChart.Data("Czynsz " + df.format(drawingClass.returnSumOfPayments(three)) +"zł",drawingClass.returnSumOfPayments(three)));
             pieChart.setData(pieChartData);}
+
+            if(from.getEditor().getText().length() != 0 && to.getEditor().getText().length() != 0){
+                LocalDate date = from.getValue();
+                int fromMonth = date.getMonthValue(); int fromDay = date.getDayOfMonth();
+                LocalDate date2 = to.getValue();
+                int toMonth = date2.getMonthValue(); int toDay = date2.getDayOfMonth();
+
+                float sumOne = drawingClass.returnPaymentsBetweenDatesAmmount(one,fromMonth,toMonth,fromDay,toDay);
+                float sumTwo = drawingClass.returnPaymentsBetweenDatesAmmount(two,fromMonth,toMonth,fromDay,toDay);
+                float sumThree = drawingClass.returnPaymentsBetweenDatesAmmount(three,fromMonth,toMonth,fromDay,toDay);
+
+                pieChartData = FXCollections.observableArrayList(
+                        new PieChart.Data("Gaz " + df.format(sumOne) + "zł",sumOne),
+                        new PieChart.Data("Prąd " + df.format(sumTwo) + "zł",sumTwo),
+                        new PieChart.Data("Czynsz " + df.format(sumThree) + "zł",sumThree));
+                pieChart.setData(pieChartData);
+
+            }
+
+            }
         else {
             percentCheckBox.setDisable(false);
             pieChartData.clear();
+            from.setDisable(true);to.setDisable(true);
+            from.setValue(null);to.setValue(null);
         }
 
    }
+   @FXML void Update(){
+        if(numbertCheckBox.isSelected())
+        drawPastPaymentsChart();
+        else
+        drawPastPaymentsChart2();
+    }
+
    @FXML //PERCENT 🤣❤😍😎💋🚊
    void drawPastPaymentsChart2(){
        Short one = 1,two=2,three=3;
        if(percentCheckBox.isSelected()){
+            from.setDisable(false);to.setDisable(false);
             numbertCheckBox.setDisable(true);
             numbertCheckBox.setSelected(false);
            DecimalFormat df = new DecimalFormat("##.##");
            df.setRoundingMode(RoundingMode.DOWN);
 
-           float sum = drawingClass.ReturnTypePastPayments(one)+drawingClass.ReturnTypePastPayments(two)+drawingClass.ReturnTypePastPayments(three);
-           float percentOne = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(one)))/sum)*100;
-           float percentTwo = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(two)))/sum)*100;
-           float percentThree = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(three)))/sum)*100;
+           if((from.getEditor().getText().length() == 0 && to.getEditor().getText().length() == 0) || (from.getEditor().getText().length() != 0 && to.getEditor().getText().length() == 0)
+           || (from.getEditor().getText().length() == 0 && to.getEditor().getText().length() != 0)){
+
+               float sum = drawingClass.ReturnTypePastPayments(one)+drawingClass.ReturnTypePastPayments(two)+drawingClass.ReturnTypePastPayments(three);
+               float percentOne = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(one)))/sum)*100;
+               float percentTwo = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(two)))/sum)*100;
+               float percentThree = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(three)))/sum)*100;
 
            pieChartData = FXCollections.observableArrayList(
                    new PieChart.Data("Gaz " + df.format(percentOne) + "%",percentOne),
                    new PieChart.Data("Prąd " + df.format(percentTwo) + "%",percentTwo),
                    new PieChart.Data("Czynsz " + df.format(percentThree) + "%",percentThree));
-           pieChart.setData(pieChartData);}
+           pieChart.setData(pieChartData);
+           }
+
+
+           if(from.getEditor().getText().length() != 0 && to.getEditor().getText().length() != 0){
+               LocalDate date = from.getValue();
+               int fromMonth = date.getMonthValue(); int fromDay = date.getDayOfMonth();
+               LocalDate date2 = to.getValue();
+               int toMonth = date2.getMonthValue(); int toDay = date2.getDayOfMonth();
+
+               float ones = drawingClass.returnPaymentsBetweenDatesPerscent(one,fromMonth,toMonth,fromDay,toDay);
+               float twos = drawingClass.returnPaymentsBetweenDatesPerscent(two,fromMonth,toMonth,fromDay,toDay);
+               float threes = drawingClass.returnPaymentsBetweenDatesPerscent(three,fromMonth,toMonth,fromDay,toDay);
+               float sumOTT = ones+twos+threes;
+               ones=(ones/sumOTT)*100;
+               twos=(twos/sumOTT)*100;
+               threes=(threes/sumOTT)*100;
+
+               pieChartData = FXCollections.observableArrayList(
+                       new PieChart.Data("Gaz " + df.format(ones) + "%",ones),
+                       new PieChart.Data("Prąd " + df.format(twos) + "%",twos),
+                       new PieChart.Data("Czynsz " + df.format(threes) + "%",threes));
+               pieChart.setData(pieChartData);
+
+           }
+       }
        else {
            numbertCheckBox.setDisable(false);
            pieChartData.clear();
+           from.setDisable(true);to.setDisable(true);
+           from.setValue(null);to.setValue(null);
        }
 
    }

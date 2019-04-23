@@ -124,7 +124,7 @@ public class Controller {
         drawPastPaymentsChart2();
     }
 
-   @FXML //PERCENT 🤣❤😍😎💋🚊
+   @FXML //PERCENT
    void drawPastPaymentsChart2(){
        Short one = 1,two=2,three=3;
        if(percentCheckBox.isSelected()){
@@ -247,6 +247,7 @@ public class Controller {
             finalDescTextField.clear();
             datePicker.getEditor().clear();
             pastID++;
+            chartsTab.setDisable(false);
         }
     }
 

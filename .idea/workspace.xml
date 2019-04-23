@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="726d2b25-fbd2-417d-9983-07c7327d2d98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/DrawingClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/DrawingClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml" afterDir="false" />
     </list>
@@ -57,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
+            <state relative-caret-position="717">
+              <caret line="249" column="38" selection-start-line="249" selection-start-column="38" selection-end-line="249" selection-end-column="38" />
               <folding>
                 <element signature="e#6618#6619#0" expanded="true" />
                 <element signature="e#6667#6668#0" expanded="true" />
@@ -88,13 +87,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/PastPayment.java" />
-        <option value="$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml" />
         <option value="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/DrawingClass.java" />
+        <option value="$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml" />
         <option value="$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1183" />
     <option name="y" value="150" />
     <option name="width" value="1383" />
@@ -229,12 +228,12 @@
       <workItem from="1556020402949" duration="797000" />
       <workItem from="1556021223862" duration="1211000" />
       <workItem from="1556022462479" duration="286000" />
-      <workItem from="1556022771713" duration="10979000" />
+      <workItem from="1556022771713" duration="11270000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20758000" />
+    <option name="totallyTimeSpent" value="21049000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="3222" height="1762" extended-state="6" />
@@ -315,10 +314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/PastPayment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-400">
@@ -342,10 +337,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
+        <state relative-caret-position="717">
+          <caret line="249" column="38" selection-start-line="249" selection-start-column="38" selection-end-line="249" selection-end-column="38" />
           <folding>
             <element signature="e#6618#6619#0" expanded="true" />
             <element signature="e#6667#6668#0" expanded="true" />

@@ -7,6 +7,8 @@ import  javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.ZoneId;
 import java.util.List;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,7 +22,8 @@ public class Controller {
     ObservableList<String> typeOptions = FXCollections.observableArrayList("Gaz","Prąd","Czynsz");
     private DrawingClass drawingClass = new DrawingClass(pastPaymentRepository.getRepo());
     private int ID =0,pastID=0;
-    private ObservableList<PieChart.Data> pieChartData;
+    private  ObservableList<PieChart.Data> pieChartData;
+
 
 
     @FXML private TableView <FuturePayment> mainPaymentsTable;
@@ -47,27 +50,66 @@ public class Controller {
     @FXML private Tab tableTab;
     @FXML private Tab chartsTab;
     @FXML private DatePicker datePicker;
+    @FXML private  CheckBox percentCheckBox;
+    @FXML private CheckBox numbertCheckBox;
 
     @FXML private PieChart pieChart;
 
     @FXML
-    void drawPFuturePayments(){
-        if(chartsTab.isSelected()){
-            Short one = 1,two=2,three=3;
-            float sum = drawingClass.ReturnTypePastPayments(one)+drawingClass.ReturnTypePastPayments(two)+drawingClass.ReturnTypePastPayments(three);
-            float percentOne = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(one)))/sum)*100;
-            float percentTwo = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(two)))/sum)*100;
-            float percentThree = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(three)))/sum)*100;
-
-            pieChartData =
-                    FXCollections.observableArrayList(
-                            new PieChart.Data("Gaz " + percentOne + "%",drawingClass.ReturnTypePastPayments(one)),
-                            new PieChart.Data("Prąd " + percentTwo + "%",drawingClass.ReturnTypePastPayments(two)),
-                            new PieChart.Data("Czynsz " + percentThree + "%" ,drawingClass.ReturnTypePastPayments(three)));
-            pieChart.setData(pieChartData);
+    void deslectCheckBoxes(){
+        if(!chartsTab.isSelected()) {
+            percentCheckBox.setSelected(false);
+            numbertCheckBox.setSelected(false);
+            pieChartData.clear();
         }
+
     }
 
+    @FXML //AMMOUNT
+    void drawPastPaymentsChart(){
+        Short one = 1,two=2,three=3;
+        if(numbertCheckBox.isSelected()){
+            percentCheckBox.setDisable(true);
+            percentCheckBox.setSelected(false);
+            DecimalFormat df = new DecimalFormat("##.##");
+            df.setRoundingMode(RoundingMode.DOWN);
+
+            pieChartData = FXCollections.observableArrayList();
+            pieChartData.add(new PieChart.Data("Gaz " + df.format(drawingClass.returnSumOfPayments(one)) +"zł",drawingClass.returnSumOfPayments(one)));
+            pieChartData.add(new PieChart.Data("Prąd " + df.format(drawingClass.returnSumOfPayments(two)) +"zł",drawingClass.returnSumOfPayments(two)));
+            pieChartData.add(new PieChart.Data("Czynsz " + df.format(drawingClass.returnSumOfPayments(three)) +"zł",drawingClass.returnSumOfPayments(three)));
+            pieChart.setData(pieChartData);}
+        else {
+            percentCheckBox.setDisable(false);
+            pieChartData.clear();
+        }
+
+   }
+   @FXML //PERCENT 🤣❤😍😎💋🚊
+   void drawPastPaymentsChart2(){
+       Short one = 1,two=2,three=3;
+       if(percentCheckBox.isSelected()){
+            numbertCheckBox.setDisable(true);
+            numbertCheckBox.setSelected(false);
+           DecimalFormat df = new DecimalFormat("##.##");
+           df.setRoundingMode(RoundingMode.DOWN);
+
+           float sum = drawingClass.ReturnTypePastPayments(one)+drawingClass.ReturnTypePastPayments(two)+drawingClass.ReturnTypePastPayments(three);
+           float percentOne = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(one)))/sum)*100;
+           float percentTwo = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(two)))/sum)*100;
+           float percentThree = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypePastPayments(three)))/sum)*100;
+
+           pieChartData = FXCollections.observableArrayList(
+                   new PieChart.Data("Gaz " + df.format(percentOne) + "%",percentOne),
+                   new PieChart.Data("Prąd " + df.format(percentTwo) + "%",percentTwo),
+                   new PieChart.Data("Czynsz " + df.format(percentThree) + "%",percentThree));
+           pieChart.setData(pieChartData);}
+       else {
+           numbertCheckBox.setDisable(false);
+           pieChartData.clear();
+       }
+
+   }
 
     @FXML
     void openTabEvent() {

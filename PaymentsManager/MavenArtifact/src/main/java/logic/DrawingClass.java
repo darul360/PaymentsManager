@@ -43,6 +43,21 @@ public class DrawingClass {
         return turboLocalList.size();
     }
 
+    public float returnSumOfPayments(short typeNum){
+        ArrayList<PastPayment> turboLocalList = new ArrayList<PastPayment>();
+        for(PastPayment pp : localList){
+            if(pp.getType() == typeNum){
+                turboLocalList.add(pp);
+            }
+        }
+        float sum =0;
+
+        for(PastPayment pp: turboLocalList){
+            sum+=pp.getPaymentPrice();
+        }
+        return sum;
+    }
+
 
 
     public void DebugPaymentsInMonth(int month){

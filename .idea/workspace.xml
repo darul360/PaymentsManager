@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="726d2b25-fbd2-417d-9983-07c7327d2d98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/DrawingClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/DrawingClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/MavenArtifact/src/main/java/logic/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentsManager/src/sample/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MavenArtifact/logic/DrawingClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MavenArtifact/logic/DrawingClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PaymentsManager/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PaymentsManager/sample/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PaymentsManager/sample/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PaymentsManager/sample/sample.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="726d2b25-fbd2-417d-9983-07c7327d2d98" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +54,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="606">
               <caret line="329" column="77" selection-start-line="329" selection-start-column="72" selection-end-line="329" selection-end-column="77" />
               <folding>
                 <element signature="e#13644#13645#0" expanded="true" />
@@ -116,7 +107,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1183" />
     <option name="y" value="150" />
     <option name="width" value="1383" />
@@ -195,12 +186,12 @@
       <workItem from="1556037001477" duration="624000" />
       <workItem from="1556037705336" duration="166000" />
       <workItem from="1556037916823" duration="7922000" />
-      <workItem from="1556117759270" duration="2960000" />
+      <workItem from="1556117759270" duration="3560000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33597000" />
+    <option name="totallyTimeSpent" value="34197000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="3222" height="1762" extended-state="6" />
@@ -329,7 +320,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PaymentsManager/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="606">
           <caret line="329" column="77" selection-start-line="329" selection-start-column="72" selection-end-line="329" selection-end-column="77" />
           <folding>
             <element signature="e#13644#13645#0" expanded="true" />

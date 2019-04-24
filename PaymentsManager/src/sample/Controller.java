@@ -2,7 +2,6 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import  javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -10,7 +9,7 @@ import javafx.scene.control.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.ZoneId;
-import java.util.List;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import logic.*;
 import  java.util.Date;
@@ -20,7 +19,7 @@ public class Controller {
     private FuturePaymentRepository futurePaymentRepository = new FuturePaymentRepository();
     private PastPaymentRepository pastPaymentRepository = new PastPaymentRepository();
     ObservableList<String> typeOptions = FXCollections.observableArrayList("Gaz","Prąd","Czynsz");
-    private DrawingClass drawingClass = new DrawingClass(pastPaymentRepository.getRepo());
+    private DrawingClass drawingClass = new DrawingClass(pastPaymentRepository.getRepo(),futurePaymentRepository.getRepo());
     private int ID =0,pastID=0;
     private  ObservableList<PieChart.Data> pieChartData;
 
@@ -51,9 +50,13 @@ public class Controller {
     @FXML private Tab chartsTab;
     @FXML private DatePicker datePicker;
     @FXML private  CheckBox percentCheckBox;
-    @FXML private CheckBox numbertCheckBox;
+    @FXML private CheckBox numberCheckBox;
+    @FXML private CheckBox percentCheckBox2;
+    @FXML private CheckBox numberCheckBox2;
     @FXML private  DatePicker from;
     @FXML private DatePicker to;
+    @FXML private ToggleButton toggleChartsMode;
+    @FXML private  Label Od,Do;
 
     @FXML private PieChart pieChart;
 
@@ -62,8 +65,10 @@ public class Controller {
         if(!chartsTab.isSelected()) {
             percentCheckBox.setSelected(false);
             percentCheckBox.setDisable(false);
-            numbertCheckBox.setSelected(false);
-            numbertCheckBox.setDisable(false);
+            numberCheckBox.setSelected(false);
+            numberCheckBox.setDisable(false);
+            numberCheckBox2.setSelected(false);
+            percentCheckBox2.setSelected(false);
             from.setDisable(true);to.setDisable(true);
             from.setValue(null);to.setValue(null);
             pieChartData.clear();
@@ -72,12 +77,102 @@ public class Controller {
 
     }
 
+    @FXML
+    void initializeFuturePaymentsChartWindow(){
+        if(toggleChartsMode.isSelected()){
+            toggleChartsMode.setStyle("-fx-background-color: #84ff96");
+
+            percentCheckBox.setDisable(true);
+            percentCheckBox.setSelected(false);
+            percentCheckBox2.setDisable(false);
+
+            numberCheckBox.setDisable(true);
+            numberCheckBox.setSelected(false);
+            numberCheckBox2.setDisable(false);
+
+            from.setDisable(true);
+            to.setDisable(true);
+            from.setOpacity(0);
+            to.setOpacity(0);
+            Od.setOpacity(0);
+            Do.setOpacity(0);
+
+            if(pieChartData != null){
+                pieChartData.clear();
+            }
+        }
+        else{
+
+            toggleChartsMode.setStyle("");
+
+            percentCheckBox2.setSelected(false);
+            percentCheckBox2.setDisable(true);
+            percentCheckBox.setDisable(false);
+
+            numberCheckBox2.setSelected(false);
+            numberCheckBox2.setDisable(true);
+            numberCheckBox.setDisable(false);
+
+            from.setDisable(false);
+            to.setDisable(false);
+            from.setOpacity(1);
+            to.setOpacity(1);
+            Od.setOpacity(1);
+            Do.setOpacity(1);
+
+            if(pieChartData != null)
+            pieChartData.clear();
+        }
+    }
+
+    @FXML void drawFuturePaymentsChart(){
+        Short one = 1,two=2,three=3;
+        if(percentCheckBox2.isSelected()){
+            numberCheckBox2.setSelected(false);
+            DecimalFormat df = new DecimalFormat("##.##");
+            df.setRoundingMode(RoundingMode.DOWN);
+                float sum = drawingClass.ReturnTypeFuturePayments(one)+drawingClass.ReturnTypeFuturePayments(two)+drawingClass.ReturnTypeFuturePayments(three);
+                float percentOne = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypeFuturePayments(one)))/sum)*100;
+                float percentTwo = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypeFuturePayments(two)))/sum)*100;
+                float percentThree = (Float.parseFloat(Integer.toString(drawingClass.ReturnTypeFuturePayments(three)))/sum)*100;
+                pieChartData = FXCollections.observableArrayList(
+                        new PieChart.Data("Gaz " + df.format(percentOne) + "%",percentOne),
+                        new PieChart.Data("Prąd " + df.format(percentTwo) + "%",percentTwo),
+                        new PieChart.Data("Czynsz " + df.format(percentThree) + "%",percentThree));
+                pieChart.setData(pieChartData);
+        }
+        else {
+            if(pieChartData != null)
+                pieChartData.clear();
+        }
+    }
+
+    @FXML void drawFuturePaymentsChart2(){
+        Short one = 1,two=2,three=3;
+        if(numberCheckBox2.isSelected()){
+
+            percentCheckBox2.setSelected(false);
+            DecimalFormat df = new DecimalFormat("##.##");
+            df.setRoundingMode(RoundingMode.DOWN);
+
+                pieChartData = FXCollections.observableArrayList();
+                pieChartData.add(new PieChart.Data("Gaz " + df.format(drawingClass.returnSumOfFuturePayments(one)) +"zł",drawingClass.returnSumOfFuturePayments(one)));
+                pieChartData.add(new PieChart.Data("Prąd " + df.format(drawingClass.returnSumOfFuturePayments(two)) +"zł",drawingClass.returnSumOfFuturePayments(two)));
+                pieChartData.add(new PieChart.Data("Czynsz " + df.format(drawingClass.returnSumOfFuturePayments(three)) +"zł",drawingClass.returnSumOfFuturePayments(three)));
+                pieChart.setData(pieChartData);
+        }
+        else {
+            if(pieChartData != null)
+                pieChartData.clear();
+        }
+    }
+
+
     @FXML //AMMOUNT
     void drawPastPaymentsChart(){
         Short one = 1,two=2,three=3;
-        if(numbertCheckBox.isSelected()){
+        if(numberCheckBox.isSelected()){
             from.setDisable(false);to.setDisable(false);
-            percentCheckBox.setDisable(true);
             percentCheckBox.setSelected(false);
             DecimalFormat df = new DecimalFormat("##.##");
             df.setRoundingMode(RoundingMode.DOWN);
@@ -96,9 +191,9 @@ public class Controller {
                 LocalDate date2 = to.getValue();
                 int toMonth = date2.getMonthValue(); int toDay = date2.getDayOfMonth();
 
-                float sumOne = drawingClass.returnPaymentsBetweenDatesAmmount(one,fromMonth,toMonth,fromDay,toDay);
-                float sumTwo = drawingClass.returnPaymentsBetweenDatesAmmount(two,fromMonth,toMonth,fromDay,toDay);
-                float sumThree = drawingClass.returnPaymentsBetweenDatesAmmount(three,fromMonth,toMonth,fromDay,toDay);
+                float sumOne = drawingClass.returnSumOfPaymentsBetweenDates(one,fromMonth,toMonth,fromDay,toDay);
+                float sumTwo = drawingClass.returnSumOfPaymentsBetweenDates(two,fromMonth,toMonth,fromDay,toDay);
+                float sumThree = drawingClass.returnSumOfPaymentsBetweenDates(three,fromMonth,toMonth,fromDay,toDay);
 
                 pieChartData = FXCollections.observableArrayList(
                         new PieChart.Data("Gaz " + df.format(sumOne) + "zł",sumOne),
@@ -110,7 +205,6 @@ public class Controller {
 
             }
         else {
-            percentCheckBox.setDisable(false);
             pieChartData.clear();
             from.setDisable(true);to.setDisable(true);
             from.setValue(null);to.setValue(null);
@@ -118,7 +212,7 @@ public class Controller {
 
    }
    @FXML void Update(){
-        if(numbertCheckBox.isSelected())
+        if(numberCheckBox.isSelected())
         drawPastPaymentsChart();
         else
         drawPastPaymentsChart2();
@@ -129,8 +223,7 @@ public class Controller {
        Short one = 1,two=2,three=3;
        if(percentCheckBox.isSelected()){
             from.setDisable(false);to.setDisable(false);
-            numbertCheckBox.setDisable(true);
-            numbertCheckBox.setSelected(false);
+            numberCheckBox.setSelected(false);
            DecimalFormat df = new DecimalFormat("##.##");
            df.setRoundingMode(RoundingMode.DOWN);
 
@@ -156,9 +249,9 @@ public class Controller {
                LocalDate date2 = to.getValue();
                int toMonth = date2.getMonthValue(); int toDay = date2.getDayOfMonth();
 
-               float ones = drawingClass.returnPaymentsBetweenDatesPerscent(one,fromMonth,toMonth,fromDay,toDay);
-               float twos = drawingClass.returnPaymentsBetweenDatesPerscent(two,fromMonth,toMonth,fromDay,toDay);
-               float threes = drawingClass.returnPaymentsBetweenDatesPerscent(three,fromMonth,toMonth,fromDay,toDay);
+               float ones = drawingClass.countPaymentsBetweenDates(one,fromMonth,toMonth,fromDay,toDay);
+               float twos = drawingClass.countPaymentsBetweenDates(two,fromMonth,toMonth,fromDay,toDay);
+               float threes = drawingClass.countPaymentsBetweenDates(three,fromMonth,toMonth,fromDay,toDay);
                float sumOTT = ones+twos+threes;
                ones=(ones/sumOTT)*100;
                twos=(twos/sumOTT)*100;
@@ -173,7 +266,6 @@ public class Controller {
            }
        }
        else {
-           numbertCheckBox.setDisable(false);
            pieChartData.clear();
            from.setDisable(true);to.setDisable(true);
            from.setValue(null);to.setValue(null);
@@ -225,7 +317,9 @@ public class Controller {
                 choiceBoxResult,descTextField.getText());
         futurePaymentRepository.AddToRepo(futurePayment);
         nameTextField.clear();priceTextField.clear();descTextField.clear();choiceBox.setValue(null);
-        ID++;}
+        ID++;
+        chartsTab.setDisable(false);
+        }
         openMainTabEvent();
     }
 

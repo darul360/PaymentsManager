@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -93,12 +94,18 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <PieChart fx:id="pieChart" layoutX="378.0" layoutY="44.0" prefHeight="467.0" prefWidth="571.0" />
-                  <DatePicker fx:id="from" disable="true" layoutX="54.0" layoutY="227.0" onAction="#Update" prefHeight="12.0" prefWidth="194.0" />
-                  <DatePicker fx:id="to" disable="true" layoutX="54.0" layoutY="305.0" onAction="#Update" prefHeight="12.0" prefWidth="194.0" />
-                  <Label layoutX="54.0" layoutY="192.0" text="Od" />
-                  <CheckBox fx:id="numbertCheckBox" layoutX="54.0" layoutY="128.0" mnemonicParsing="false" onAction="#drawPastPaymentsChart" text="Wykres liczbowy" />
-                  <Label layoutX="54.0" layoutY="278.0" text="Do" />
-                  <CheckBox fx:id="percentCheckBox" layoutX="54.0" layoutY="76.0" mnemonicParsing="false" onAction="#drawPastPaymentsChart2" text="Wykres procentowy" />
+                  <DatePicker fx:id="from" disable="true" layoutX="55.0" layoutY="257.0" onAction="#Update" prefHeight="12.0" prefWidth="194.0" />
+                  <DatePicker fx:id="to" disable="true" layoutX="55.0" layoutY="335.0" onAction="#Update" prefHeight="12.0" prefWidth="194.0" />
+                  <Label fx:id="Od" layoutX="55.0" layoutY="222.0" text="Od" />
+                  <CheckBox fx:id="numberCheckBox" layoutX="55.0" layoutY="158.0" mnemonicParsing="false" onAction="#drawPastPaymentsChart" text="Wykres liczbowy" />
+                  <Label fx:id="Do" layoutX="55.0" layoutY="308.0" text="Do" />
+                  <CheckBox fx:id="percentCheckBox" layoutX="55.0" layoutY="106.0" mnemonicParsing="false" onAction="#drawPastPaymentsChart2" text="Wykres procentowy" />
+                  <ToggleButton fx:id="toggleChartsMode" layoutX="55.0" layoutY="31.0" mnemonicParsing="false" onAction="#initializeFuturePaymentsChartWindow" prefHeight="39.0" prefWidth="191.0" text="Zaplanowane płatności">
+                     <font>
+                        <Font size="13.0" />
+                     </font></ToggleButton>
+                  <CheckBox fx:id="percentCheckBox2" disable="true" layoutX="55.0" layoutY="106.0" mnemonicParsing="false" onAction="#drawFuturePaymentsChart" text="Wykres procentowy" />
+                  <CheckBox fx:id="numberCheckBox2" disable="true" layoutX="55.0" layoutY="158.0" mnemonicParsing="false" onAction="#drawFuturePaymentsChart2" text="Wykres liczbowy" />
                </children></AnchorPane>
       </content>
     </Tab>

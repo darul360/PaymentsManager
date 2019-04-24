@@ -14,5 +14,6 @@ Basic settings (TOUCH IT ONLY IF AFTER COMPLETING NEXT STEP WON'T COMPILE PROJEC
 - Different modules for JavaFX and Java **(100%)** *Need to be repaired*
 - Unit tests **(60%)**
 - Maven **(100%)**
-
+- Lambda expressions **(0%)**
+- MYSQL DB Connected **(0%)**
 

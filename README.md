@@ -2,7 +2,7 @@
 **Import project, do not open, in Intelij**
 
 Target JDK 11.0.2
-Basic settings
+Basic settings (TOUCH IT ONLY IF AFTER COMPLETING NEXT STEP WON'T COMPILE PROJECT)
 ![](https://i.ibb.co/QNXKkqx/compiler.png)
 
 ## **Setting for JavaFX(11)** ##
@@ -15,5 +15,6 @@ Basic settings
 - Different modules for JavaFX and Java **(100%)** *Need to be repaired*
 - Unit tests **(60%)**
 - Maven **(100%)**
-
+- Lambda expressions **(0%)**
+- MYSQL DB Connected **(0%)**
 
